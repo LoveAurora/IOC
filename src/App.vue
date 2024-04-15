@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <keep-alive :include="['Aboutme', 'Message', 'FriendsLink', 'Reward']">
+    <keep-alive
+      :include="['IOCDetails', 'IOCSearch', 'IOCExhibit', 'ThreatGang']"
+    >
       <router-view></router-view>
     </keep-alive>
   </div>
@@ -183,6 +185,7 @@ input[type="button"],
 input[type="submit"],
 input[type="search"] {
   -webkit-appearance: none;
+  appearance: none;
   border-radius: 0;
 }
 /*************其他内容*************/
@@ -489,10 +492,6 @@ a {
 
 .clearfix:after {
   clear: both;
-}
-.smalltitle {
-  /*height:36px;*/
-  /*line-height: 36px;*/
 }
 
 .logoImg {

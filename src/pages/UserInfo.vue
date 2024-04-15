@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import header from "../components/header.vue";
+import Header from "../components/Header.vue";
 import { getUserInfo, savaUserInfo } from "../api/user.js"; //获取用户信息，保存用户信息
 import store from "../store";
 export default {
@@ -204,7 +204,7 @@ export default {
   },
   components: {
     //定义组件
-    "wbc-nav": header,
+    "wbc-nav": Header,
   },
   watch: {
     // 如果路由有变化，会再次执行该方法

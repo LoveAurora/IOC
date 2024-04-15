@@ -1,103 +1,62 @@
 <!-- 头部公用 -->
 <template>
-  <div class="">
-    <div class="headBack">
-      <el-row class="container">
-        <el-col :span="24">
-          <!-- pc端导航 -->
-          <div class="headBox">
-            <el-menu
-              :default-active="activeIndex"
-              class="el-menu-demo"
-              mode="horizontal"
-              @select="handleSelect"
-              :router="true"
+  <div class="headBack">
+    <el-row class="container">
+      <el-col :span="24">
+        <!-- pc端导航 -->
+        <div class="headBox">
+          <el-menu
+            :default-active="activeIndex"
+            class="el-menu-demo"
+            mode="horizontal"
+            @select="handleSelect"
+            :router="true"
+          >
+            <el-menu-item index="/IOCSearch">
+              <i class="el-icon-s-home"></i> 首页</el-menu-item
             >
-              <el-menu-item index="/Home"
-                ><i class="fa fa-wa fa-home"></i> 首页</el-menu-item
-              >
-              <el-submenu index="/Share">
-                <template slot="title"
-                  ><i class="fa fa-wa fa-archive"></i> 分类</template
-                >
-                <el-menu-item
-                  v-for="(item, index) in classListObj"
-                  :key="'class1' + index"
-                  :index="'/Share?classId=' + item.id"
-                  >{{ item.name }}</el-menu-item
-                >
-              </el-submenu>
-              <el-menu-item index="/Reward"
-                ><i class="fa fa-wa fa-cny"></i> 赞赏</el-menu-item
-              >
-              <el-menu-item index="/Friendslink"
-                ><i class="fa fa-wa fa-users"></i>友链</el-menu-item
-              >
+            <el-menu-item index="/ThreatGang"
+              ><i class="fa fa-wa fa-users"></i>威胁团伙</el-menu-item
+            >
+            <el-menu-item index="/IOCDetails">
+              <i class="el-icon-search"></i> IOC详情</el-menu-item
+            >
+            <el-menu-item index="/IOCExhibit">
+              <i class="el-icon-s-order"></i> IOC数据展示</el-menu-item
+            >
 
-              <div class="userInfo">
-                <div v-show="!haslogin" class="nologin">
-                  <a href="javascript:void(0);" @click="loginFun(1)"
-                    >登录&nbsp;</a
-                  >|<a href="javascript:void(0);" @click="loginFun(0)"
-                    >&nbsp;注册</a
-                  >
-                </div>
-                <div v-show="haslogin" class="haslogin">
-                  <i class="fa fa-fw fa-user-circle userImg"></i>
-                  <ul class="haslogin-info">
-                    <li>
-                      <a href="#/UserInfo">个人中心</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);" @click="userlogout"
-                        >退出登录</a
-                      >
-                    </li>
-                  </ul>
-                </div>
+            <div class="userInfo">
+              <div v-show="!haslogin.value" class="nologin">
+                <a href="javascript:void(0);" @click="loginFun(1)">登录&nbsp;</a
+                >|<a href="javascript:void(0);" @click="loginFun(0)"
+                  >&nbsp;注册</a
+                >
               </div>
-            </el-menu>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div
-      class="headImgBox"
-      :style="{
-        backgroundImage: this.$store.state.themeObj.top_image
-          ? 'url(' + this.$store.state.themeObj.top_image + ')'
-          : 'url(static/img/headbg05.jpg)',
-      }"
-    >
-      <div class="scene">
-        <div><span id="luke"></span></div>
-      </div>
-      <div class="h-information">
-        <img
-          :src="
-            this.$store.state.themeObj.head_portrait
-              ? this.$store.state.themeObj.head_portrait
-              : 'static/img/tou.png'
-          "
-          alt=""
-        />
-
-        <h2 class="h-description">
-          {{
-            this.$store.state.themeObj.autograph
-              ? this.$store.state.themeObj.autograph
-              : "三更灯火五更鸡，正是男儿读书时"
-          }}
-        </h2>
-      </div>
-    </div>
+              <div v-show="haslogin.value" class="haslogin">
+                <i class="fa fa-fw fa-user-circle userImg"></i>
+                <ul class="haslogin-info">
+                  <li>
+                    <a href="#/UserInfo">个人中心</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" @click="userlogout"
+                      >退出登录</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </el-menu>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
+
 <script>
 import { logout } from "../api/user";
 import { removeToken } from "../utils/auth";
 import { getCategoryList } from "../api/category";
-import { Typeit } from "../utils/plug.js";
 export default {
   data() {
     //选项 / 数据
@@ -257,13 +216,11 @@ export default {
     //页面元素加载完成
     var that = this;
     var timer = setTimeout(function () {
-      Typeit(that.$store.state.themeObj.user_start, "#luke"); //打字机效果
       clearTimeout(timer);
     }, 500);
   },
 };
 </script>
-
 <style>
 /*********头部导航栏********/
 
@@ -297,14 +254,14 @@ export default {
 
 .headBox .el-menu-demo li.el-menu-item,
 .headBox .el-menu--horizontal .el-submenu .el-submenu__title {
-  height: 38px;
-  line-height: 38px;
+  height: 50px;
+  line-height: 50px;
   border-bottom: none !important;
 }
 
 .headBox .el-submenu li.el-menu-item {
-  height: 38px;
-  line-height: 38px;
+  height: 50px;
+  line-height: 50px;
 }
 
 .headBox li .fa-wa {
@@ -320,7 +277,7 @@ export default {
 }
 
 .headBox .el-menu--horizontal .el-submenu > .el-menu {
-  top: 38px;
+  top: 50px;
   border: none;
   padding: 0;
 }
@@ -405,7 +362,7 @@ export default {
 
 .headBox .userInfo {
   height: 100%;
-  line-height: 38px;
+  line-height: 50px;
   position: absolute;
   right: 30px;
   top: 0;
@@ -414,7 +371,7 @@ export default {
 
 .headBox .userInfo a {
   color: #fff;
-  font-size: 13px;
+  font-size: 15px;
   transition: all 0.2s ease-out;
 }
 
@@ -425,7 +382,9 @@ export default {
 .headBox .nologin {
   text-align: right;
 }
-
+a {
+  text-decoration: none;
+}
 .headBox .haslogin {
   text-align: right;
   position: relative;
@@ -624,11 +583,14 @@ export default {
   font-weight: 700;
   /*font-family: 'Sigmar One';*/
 }
+
 .h-information h2 a {
   background: linear-gradient(to right, #df2050, #48456d);
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
+  mask-image: linear-gradient(to left, transparent, #000);
 }
 .headImgBox .scene {
   width: 100%;
