@@ -2,7 +2,7 @@
   <div>
     <Header />
     <el-container>
-      <el-header>威胁分析</el-header>
+      <el-header id="printer">威胁分析</el-header>
       <el-main>
         <el-row align="middle" class="search-row">
           <el-col :span="10">
@@ -26,7 +26,7 @@
         </el-row>
         <el-row type="flex" justify="center">
           <el-col :span="16">
-            <h3>热门IOC示例</h3>
+            <div><span id="luke" style="font-size: large"></span></div>
           </el-col>
         </el-row>
         <el-row type="flex" justify="center">
@@ -44,7 +44,7 @@
 
 <script>
 import Header from "./Header.vue";
-
+import { Typeit } from "../utils/plug.js";
 export default {
   components: {
     Header,
@@ -64,6 +64,17 @@ export default {
     print() {
       console.log(this.inputValue);
     },
+  },
+  mounted() {
+    //页面元素加载完成
+    var that = this;
+    var text1 = "热门IOC示例"; //打字机效果
+    var text2 = "威胁分析"; //打字机效果
+    var timer = setTimeout(function () {
+      Typeit(that.$store.state.themeObj.user_start, "#luke", text1); //打字机效果
+      Typeit(that.$store.state.themeObj.user_start, "#printer", text2); //打字机效果
+      clearTimeout(timer);
+    }, 500);
   },
 };
 </script>

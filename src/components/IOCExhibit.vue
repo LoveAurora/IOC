@@ -3,7 +3,7 @@
     <Header />
     <div class="content">
       <el-container>
-        <el-header>数据展示</el-header>
+        <el-header id="printer">数据展示</el-header>
       </el-container>
       <el-table
         :data="data.data"
@@ -22,7 +22,7 @@
 <script>
 import Header from "./Header.vue";
 import axios from "axios";
-
+import { Typeit } from "../utils/plug.js";
 export default {
   components: {
     Header,
@@ -31,9 +31,6 @@ export default {
     return {
       data: [],
     };
-  },
-  mounted() {
-    this.fetchData();
   },
   methods: {
     async fetchData() {
@@ -47,12 +44,23 @@ export default {
         console.error("Error:", error);
       }
     },
+    rowHover({ rowIndex }) {
+      if (rowIndex === -1) {
+        return "";
+      }
+      return "hover-row-class";
+    },
   },
-  rowHover({ rowIndex }) {
-    if (rowIndex === -1) {
-      return "";
-    }
-    return "hover-row-class";
+
+  mounted() {
+    this.fetchData();
+    //页面元素加载完成
+    var that = this;
+    var text = "数据展示"; //打字机效果
+    var timer = setTimeout(function () {
+      Typeit(that.$store.state.themeObj.user_start, "#printer", text); //打字机效果
+      clearTimeout(timer);
+    }, 500);
   },
 };
 </script>

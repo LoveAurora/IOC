@@ -56,7 +56,7 @@
 <script>
 import { logout } from "../api/user";
 import { removeToken } from "../utils/auth";
-import { getCategoryList } from "../api/category";
+// import { getCategoryList } from "../api/category";
 export default {
   data() {
     //选项 / 数据
@@ -160,7 +160,7 @@ export default {
         that.haslogin = false;
       }
       //获取分类
-      this.getCategoryList();
+      // this.getCategoryList();
 
       if (
         (this.$route.name == "Share" || this.$route.name == "Home") &&
@@ -178,7 +178,7 @@ export default {
   },
   watch: {
     // 如果路由有变化，会再次执行该方法
-    $route: "routeChange",
+    // $route: "routeChange",
   },
   created() {
     //生命周期函数

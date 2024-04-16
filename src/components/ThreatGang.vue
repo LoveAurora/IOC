@@ -3,7 +3,7 @@
     <Header />
     <div class="underheadbox">
       <el-container>
-        <el-header>威胁团伙</el-header>
+        <el-header id="printer">威胁团体</el-header>
       </el-container>
 
       <el-row justify="center" align="middle" class="search-row">
@@ -58,11 +58,12 @@
 
 <script>
 import Header from "./Header.vue";
+import { Typeit } from "../utils/plug.js";
 export default {
+  name: "ThreatGang",
   components: {
     Header,
   },
-  name: "ThreatGang",
   data() {
     return {
       selectedRegion: "",
@@ -145,6 +146,15 @@ export default {
     print() {
       console.log(this.selectedRegion, this.selectedCategory, this.searchText);
     },
+  },
+  mounted() {
+    //页面元素加载完成
+    var that = this;
+    var text = "威胁团伙"; //打字机效果
+    var timer = setTimeout(function () {
+      Typeit(that.$store.state.themeObj.user_start, "#printer", text); //打字机效果
+      // clearTimeout(timer);
+    }, 500);
   },
 };
 </script>

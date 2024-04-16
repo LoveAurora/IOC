@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <keep-alive
+    <!-- <keep-alive
       :include="['IOCDetails', 'IOCSearch', 'IOCExhibit', 'ThreatGang']"
-    >
-      <router-view></router-view>
-    </keep-alive>
+    > -->
+    <router-view></router-view>
+    <!-- </keep-alive> -->
   </div>
 </template>
 

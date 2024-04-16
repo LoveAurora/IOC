@@ -4,7 +4,7 @@
     <div class="content">
       <el-row :justify="'center'">
         <el-container>
-          <el-header>威胁情报分析</el-header>
+          <el-header id="printer">威胁情报分析</el-header>
         </el-container>
       </el-row>
       <el-row class="row">
@@ -68,6 +68,7 @@
 
 <script>
 import Header from "./Header.vue";
+import { Typeit } from "../utils/plug.js";
 
 export default {
   components: {
@@ -84,6 +85,15 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    //页面元素加载完成
+    var that = this;
+    var text = "威胁情报分析"; 
+    var timer = setTimeout(function () {
+      Typeit(that.$store.state.themeObj.user_start, "#printer", text); //打字机效果
+      clearTimeout(timer);
+    }, 500);
   },
 };
 </script>
