@@ -18,7 +18,7 @@
             >
           </el-col>
           <el-col :span="3">
-            <el-button type="primary"
+            <el-button type="primary" @click="uploadFile"
               >上传文件 <el-icon><Upload /></el-icon
               ><i class="el-icon-upload el-icon--right"></i
             ></el-button>
@@ -45,12 +45,15 @@
 <script>
 import Header from "./Header.vue";
 import { Typeit } from "../utils/plug.js";
+import store from "../store";
+
 export default {
   components: {
     Header,
   },
   data() {
     return {
+      uploadURL: "",
       inputValue: "",
       tableData: [
         { ip: "36.150.168.184", domain: "www.usspuh.top", md5: "" },
@@ -64,6 +67,31 @@ export default {
     print() {
       console.log(this.inputValue);
     },
+    uploadFile() {
+      let input = document.createElement("input");
+      input.type = "file";
+      input.onchange = (e) => {
+        let file = e.target.files[0]; // 获取用户选择的文件
+        let formData = new FormData();
+        formData.append("file", file); // 将文件添加到 FormData 中，"file" 是服务器接收文件的参数名称
+        console.log(this.uploadURL);
+        // 发送文件到服务器
+        fetch(this.uploadURL, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json()) // 如果服务器返回 JSON 数据，可以解析
+          .then((data) => {
+            // 处理服务器响应
+            console.log(data);
+          })
+          .catch((error) => {
+            // 处理错误
+            console.error("Error:", error);
+          });
+      };
+      input.click();
+    },
   },
   mounted() {
     //页面元素加载完成
@@ -75,6 +103,12 @@ export default {
       Typeit(that.$store.state.themeObj.user_start, "#printer", text2); //打字机效果
       clearTimeout(timer);
     }, 500);
+  },
+  created() {
+    //生命周期函数
+    // this.routeChange();
+    this.uploadURL = store.state.baseURL + "iocupload";
+    console.log(this.uploadURL);
   },
 };
 </script>
